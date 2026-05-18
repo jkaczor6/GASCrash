@@ -28,6 +28,7 @@ void AGC_PlayerController::SetupInputComponent()
 	EIC->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AGC_PlayerController::Move);
 	EIC->BindAction(LookAction, ETriggerEvent::Triggered, this, &AGC_PlayerController::Look);
 	
+	EIC->BindAction(PrimaryAction, ETriggerEvent::Started, this, &AGC_PlayerController::Primary);
 }
 
 void AGC_PlayerController::Jump()
@@ -65,4 +66,9 @@ void AGC_PlayerController::Look(const FInputActionValue& Value)
 	
 	AddYawInput(LookAxisVector.X);
 	AddPitchInput(LookAxisVector.Y);
+}
+
+void AGC_PlayerController::Primary()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "Primary");
 }
