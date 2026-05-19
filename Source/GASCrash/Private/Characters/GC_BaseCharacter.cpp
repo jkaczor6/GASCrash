@@ -3,6 +3,8 @@
 
 #include "GASCrash/Public/Characters/GC_BaseCharacter.h"
 
+#include "AbilitySystemComponent.h"
+
 AGC_BaseCharacter::AGC_BaseCharacter()
 {
 	PrimaryActorTick.bCanEverTick = false;
@@ -14,4 +16,15 @@ AGC_BaseCharacter::AGC_BaseCharacter()
 UAbilitySystemComponent* AGC_BaseCharacter::GetAbilitySystemComponent() const
 {
 	return nullptr;
+}
+
+void AGC_BaseCharacter::GiveStartupAbilities()
+{
+	if (!IsValid(GetAbilitySystemComponent())) return;
+	
+	for (const auto& Ability : StartupAbilities)
+	{
+		FGameplayAbilitySpec AbilitySpec{ FGameplayAbilitySpec(Ability) };
+		GetAbilitySystemComponent()->GiveAbility(AbilitySpec);
+	}
 }

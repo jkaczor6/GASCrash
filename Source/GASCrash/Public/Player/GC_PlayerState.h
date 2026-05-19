@@ -19,6 +19,6 @@ public:
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	
 private:
-	UPROPERTY(VisibleAnywhere, Category = "Crash|Abilities")
+	UPROPERTY(VisibleAnywhere, Category = "GAS|Abilities")
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
 };

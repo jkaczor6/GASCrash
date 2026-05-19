@@ -7,6 +7,8 @@
 #include "GameFramework/Character.h"
 #include "GC_BaseCharacter.generated.h"
 
+class UGameplayAbility;
+
 UCLASS(Abstract)
 class GASCRASH_API AGC_BaseCharacter : public ACharacter, public IAbilitySystemInterface
 {
@@ -16,4 +18,10 @@ public:
 	AGC_BaseCharacter();
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	
+protected:
+	void GiveStartupAbilities();
+	
+private:
+	UPROPERTY(EditDefaultsOnly, Category = "GAS|Abilities")
+	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
 };

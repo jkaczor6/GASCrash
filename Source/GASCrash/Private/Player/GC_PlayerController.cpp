@@ -70,5 +70,5 @@ void AGC_PlayerController::Look(const FInputActionValue& Value)
 
 void AGC_PlayerController::Primary()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "Primary");
+	
 }
