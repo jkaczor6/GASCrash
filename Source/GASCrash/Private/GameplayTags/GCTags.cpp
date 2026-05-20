@@ -10,4 +10,12 @@ namespace GCTags
 		UE_DEFINE_GAMEPLAY_TAG(Secondary, "GCTags.GCAbilities.Secondary")
 		UE_DEFINE_GAMEPLAY_TAG(Tertiary, "GCTags.GCAbilities.Tertiary")
 	}
+	
+	namespace Events
+	{
+		namespace Enemy
+		{
+			UE_DEFINE_GAMEPLAY_TAG(HitReact, "GCTags.Events.Enemy.HitReact")
+		}
+	}
 }
