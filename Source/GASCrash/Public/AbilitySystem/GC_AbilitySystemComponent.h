@@ -13,10 +13,10 @@ class GASCRASH_API UGC_AbilitySystemComponent : public UAbilitySystemComponent
 	GENERATED_BODY()
 
 public:
-	UGC_AbilitySystemComponent();
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
-protected:
-	virtual void BeginPlay() override;
-
+	virtual void OnGiveAbility(FGameplayAbilitySpec& AbilitySpec) override;
+	virtual void OnRep_ActivateAbilities() override;
+	
+private:
+	
+	void HandleAutoActivateAbility(const FGameplayAbilitySpec& AbilitySpec);
 };
