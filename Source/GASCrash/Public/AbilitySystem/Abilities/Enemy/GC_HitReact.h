@@ -11,4 +11,13 @@ class GASCRASH_API UGC_HitReact : public UGC_GameplayAbility
 {
 	GENERATED_BODY()
 	
+public:
+	UFUNCTION(BlueprintCallable, Category="GAS|Abilities")
+	void CacheHitDirectionVectors(AActor* Instigator);
+	
+	UPROPERTY(BlueprintReadOnly, Category="GAS|Abilities")
+	FVector AvatarForward;
+	
+	UPROPERTY(BlueprintReadOnly, Category="GAS|Abilities")
+	FVector ToInstigator;
 };
