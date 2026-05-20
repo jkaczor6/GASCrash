@@ -23,12 +23,12 @@ The goal is a thorough, hands-on understanding of GAS architecture in a real gam
 | **Ability System Component** | Custom ASC with Gameplay Abilities, Base Ability Class, Play Montage and Wait task |
 | **Gameplay Tags** | Native tags defined in C++, abilities activated by tag |
 | **Ability architecture** | Primary, secondary and tertiary ability slots |
+| **Gameplay Events** | Enemies, Directional HitReacts, Auto Activated Abilities |
 
 ---
 
 ## 🔜 In Progress
 
-- Gameplay Events
 - Attributes & Attribute Sets
 - Character Death & Respawning
 - Enemy Combat AI
