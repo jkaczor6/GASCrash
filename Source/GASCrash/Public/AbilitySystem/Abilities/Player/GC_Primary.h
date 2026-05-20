@@ -13,9 +13,12 @@ class GASCRASH_API UGC_Primary : public UGC_GameplayAbility
 	
 public:
 	UFUNCTION(BlueprintCallable, Category="GAS|Abilities")
-	void HitBoxOverlapTest();
+	TArray<AActor*> HitBoxOverlapTest();
 	
+	UFUNCTION(BlueprintCallable, Category="GAS|Abilities")
+	void SendHitReactEventToActors(const TArray<AActor*>& ActorsHit);
 private:
+	void DrawHitBoxOverlapDebugs(const TArray<FOverlapResult>& OverlapResults, const FVector& HitBoxLocation) const;
 	
 	UPROPERTY(EditDefaultsOnly, Category="GAS|Abilities")
 	float HitBoxRadius{ 100.f };
