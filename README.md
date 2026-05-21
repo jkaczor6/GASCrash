@@ -24,12 +24,12 @@ The goal is a thorough, hands-on understanding of GAS architecture in a real gam
 | **Gameplay Tags** | Native tags defined in C++, abilities activated by tag |
 | **Ability architecture** | Primary, secondary and tertiary ability slots |
 | **Gameplay Events** | Enemies, Directional HitReacts, Auto Activated Abilities |
+| **Attributes & Attribute Sets** | Attribute Sets, Widgets, Gameplay Effects, Curve Tables, Leveling Up Abilities |
 
 ---
 
 ## 🔜 In Progress
 
-- Attributes & Attribute Sets
 - Character Death & Respawning
 - Enemy Combat AI
 - Player Damage & Hit Reacts
