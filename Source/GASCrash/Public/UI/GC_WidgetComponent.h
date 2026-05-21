@@ -3,11 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AttributeSet.h"
 #include "Components/WidgetComponent.h"
 #include "GC_WidgetComponent.generated.h"
 
 
-class UAttributeSet;
 class UAbilitySystemComponent;
 class UGC_AttributeSet;
 class UGC_AbilitySystemComponent;
@@ -24,6 +24,8 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+	UPROPERTY(EditAnywhere)
+	TMap<FGameplayAttribute, FGameplayAttribute> AttributeMap;
 private:
 	TWeakObjectPtr<AGC_BaseCharacter> GASCharacter;
 	TWeakObjectPtr<UGC_AbilitySystemComponent> AbilitySystemComponent;
@@ -32,6 +34,7 @@ private:
 	void InitAbilitySystemData();
 	bool IsASCInitialized() const;
 	void InitializedAttributesDelegate();
+	void BindWidgetToAttributeChanges(UWidget* WidgetObject, const TTuple<FGameplayAttribute, FGameplayAttribute>& Pair) const;
 	
 	UFUNCTION()
 	void OnASCInitialized(UAbilitySystemComponent* ASC, UAttributeSet* AS);
