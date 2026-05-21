@@ -4,6 +4,7 @@
 #include "GASCrash/Public/Characters/GC_BaseCharacter.h"
 
 #include "AbilitySystemComponent.h"
+#include "Virtualization/VirtualizationSystem.h"
 
 AGC_BaseCharacter::AGC_BaseCharacter()
 {
@@ -27,4 +28,13 @@ void AGC_BaseCharacter::GiveStartupAbilities()
 		FGameplayAbilitySpec AbilitySpec{ FGameplayAbilitySpec(Ability) };
 		GetAbilitySystemComponent()->GiveAbility(AbilitySpec);
 	}
+}
+
+void AGC_BaseCharacter::InitializeAttributes() const
+{
+	checkf(IsValid(InitializeAttributesEffect), TEXT("InitializeAttributesEffect not set."));
+	
+	FGameplayEffectContextHandle ContextHandle{ GetAbilitySystemComponent()->MakeEffectContext() };
+	FGameplayEffectSpecHandle SpecHandle{ GetAbilitySystemComponent()->MakeOutgoingSpec(InitializeAttributesEffect, 1.f, ContextHandle) };
+	GetAbilitySystemComponent()->ApplyGameplayEffectSpecToSelf(*SpecHandle.Data.Get());
 }
