@@ -18,7 +18,7 @@ class GASCRASH_API AGC_PlayerState : public APlayerState, public IAbilitySystemI
 public:
 	AGC_PlayerState();
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
-	
+	UAttributeSet* GetAttributeSet() const { return AttributeSet; }
 private:
 	UPROPERTY(VisibleAnywhere, Category = "GAS|Abilities")
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;

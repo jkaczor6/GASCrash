@@ -17,6 +17,7 @@ class GASCRASH_API AGC_EnemyCharacter : public AGC_BaseCharacter
 public:
 	AGC_EnemyCharacter();
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	virtual UAttributeSet* GetAttributeSet() const override;
 	
 protected:
 	virtual void BeginPlay() override;

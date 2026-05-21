@@ -55,6 +55,7 @@ void AGC_PlayerCharacter::PossessedBy(AController* NewController)
 	if (!IsValid(GetAbilitySystemComponent()) || !HasAuthority()) return;
 	
 	GetAbilitySystemComponent()->InitAbilityActorInfo(GetPlayerState(), this);
+	OnASCInitialized.Broadcast(GetAbilitySystemComponent(), GetAttributeSet());
 	GiveStartupAbilities();
 	InitializeAttributes();
 }
@@ -66,5 +67,15 @@ void AGC_PlayerCharacter::OnRep_PlayerState()
 	if (!IsValid(GetAbilitySystemComponent())) return;
 	
 	GetAbilitySystemComponent()->InitAbilityActorInfo(GetPlayerState(), this);
+	OnASCInitialized.Broadcast(GetAbilitySystemComponent(), GetAttributeSet());
+	
+}
+
+UAttributeSet* AGC_PlayerCharacter::GetAttributeSet() const
+{
+	AGC_PlayerState* GCPlayerState{ Cast<AGC_PlayerState>(GetPlayerState()) };
+	if (!IsValid(GCPlayerState)) return nullptr;
+	
+	return GCPlayerState->GetAttributeSet();
 }
 

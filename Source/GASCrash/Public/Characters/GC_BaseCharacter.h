@@ -7,8 +7,11 @@
 #include "GameFramework/Character.h"
 #include "GC_BaseCharacter.generated.h"
 
+class UAttributeSet;
 class UGameplayEffect;
 class UGameplayAbility;
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FASCInitialized, UAbilitySystemComponent*, ASC, UAttributeSet*, AS);
 
 UCLASS(Abstract)
 class GASCRASH_API AGC_BaseCharacter : public ACharacter, public IAbilitySystemInterface
@@ -18,7 +21,10 @@ class GASCRASH_API AGC_BaseCharacter : public ACharacter, public IAbilitySystemI
 public:
 	AGC_BaseCharacter();
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	virtual UAttributeSet* GetAttributeSet() const { return nullptr; };
 	
+	UPROPERTY(BlueprintAssignable)
+	FASCInitialized OnASCInitialized;
 protected:
 	void GiveStartupAbilities();
 	void InitializeAttributes() const;
