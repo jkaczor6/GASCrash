@@ -25,12 +25,12 @@ The goal is a thorough, hands-on understanding of GAS architecture in a real gam
 | **Ability architecture** | Primary, secondary and tertiary ability slots |
 | **Gameplay Events** | Enemies, Directional HitReacts, Auto Activated Abilities |
 | **Attributes & Attribute Sets** | Attribute Sets, Widgets, Gameplay Effects, Curve Tables, Leveling Up Abilities |
+| **Character Death & Respawning** | Attribute Changes, Async Task, Applying Tags, Resetting Attributes, Handling Death and Respawn |
 
 ---
 
 ## 🔜 In Progress
 
-- Character Death & Respawning
 - Enemy Combat AI
 - Player Damage & Hit Reacts
 - Ability Cost & Cooldown
