@@ -4,6 +4,7 @@
 #include "GASCrash/Public/Characters/GC_PlayerCharacter.h"
 
 #include "AbilitySystemComponent.h"
+#include "AbilitySystem/GC_AttributeSet.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -58,6 +59,12 @@ void AGC_PlayerCharacter::PossessedBy(AController* NewController)
 	OnASCInitialized.Broadcast(GetAbilitySystemComponent(), GetAttributeSet());
 	GiveStartupAbilities();
 	InitializeAttributes();
+	
+	
+	UGC_AttributeSet* GC_AS = Cast<UGC_AttributeSet>(GetAttributeSet());
+	if (!IsValid(GC_AS)) return;
+	
+	GetAbilitySystemComponent()->GetGameplayAttributeValueChangeDelegate(GC_AS->GetHealthAttribute()).AddUObject(this, &ThisClass::OnHealthChanged);
 }
 
 void AGC_PlayerCharacter::OnRep_PlayerState()
@@ -69,6 +76,10 @@ void AGC_PlayerCharacter::OnRep_PlayerState()
 	GetAbilitySystemComponent()->InitAbilityActorInfo(GetPlayerState(), this);
 	OnASCInitialized.Broadcast(GetAbilitySystemComponent(), GetAttributeSet());
 	
+	UGC_AttributeSet* GC_AS = Cast<UGC_AttributeSet>(GetAttributeSet());
+	if (!IsValid(GC_AS)) return;
+	
+	GetAbilitySystemComponent()->GetGameplayAttributeValueChangeDelegate(GC_AS->GetHealthAttribute()).AddUObject(this, &ThisClass::OnHealthChanged);
 }
 
 UAttributeSet* AGC_PlayerCharacter::GetAttributeSet() const
