@@ -7,6 +7,11 @@
 #include "Net/UnrealNetwork.h"
 #include "Virtualization/VirtualizationSystem.h"
 
+namespace GASTags
+{
+	const FName Player = FName("Player");
+}
+
 AGC_BaseCharacter::AGC_BaseCharacter()
 {
 	PrimaryActorTick.bCanEverTick = false;

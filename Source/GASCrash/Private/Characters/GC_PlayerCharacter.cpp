@@ -39,6 +39,7 @@ AGC_PlayerCharacter::AGC_PlayerCharacter()
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	FollowCamera->bUsePawnControlRotation = false;
 	
+	Tags.Add(GASTags::Player);
 }
 
 UAbilitySystemComponent* AGC_PlayerCharacter::GetAbilitySystemComponent() const

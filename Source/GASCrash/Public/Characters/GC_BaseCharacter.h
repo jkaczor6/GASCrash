@@ -7,6 +7,11 @@
 #include "GameFramework/Character.h"
 #include "GC_BaseCharacter.generated.h"
 
+namespace GASTags
+{
+	extern GASCRASH_API const FName Player;
+}
+
 struct FOnAttributeChangeData;
 class UAttributeSet;
 class UGameplayEffect;
