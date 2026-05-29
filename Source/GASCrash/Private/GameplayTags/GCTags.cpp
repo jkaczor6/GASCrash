@@ -2,6 +2,11 @@
 
 namespace GCTags
 {
+	namespace SetByCaller
+	{
+		UE_DEFINE_GAMEPLAY_TAG(Projectile, "GCTags.SetByCaller.Projectile")
+	}
+	
 	namespace GCAbilities
 	{
 		UE_DEFINE_GAMEPLAY_TAG(ActivateOnGiven, "GCTags.GCAbilities.ActivateOnGiven")
