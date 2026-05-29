@@ -19,7 +19,7 @@ public:
 	virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="GAS|Damage", meta = (ExposeOnSpawn, ClampMin = "0.0"))
-	float Damage{10.f};
+	float Damage{-10.f};
 	
 	UFUNCTION(BlueprintImplementableEvent, Category = "GAS|Projectile")
 	void SpawnImpactEffects();
