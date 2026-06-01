@@ -23,6 +23,7 @@ namespace GCTags
 		namespace Enemy
 		{
 			UE_DEFINE_GAMEPLAY_TAG(HitReact, "GCTags.Events.Enemy.HitReact")
+			UE_DEFINE_GAMEPLAY_TAG(MeleeTraceHit, "GCTags.Events.Enemy.MeleeTraceHit")
 		}
 	}
 }
