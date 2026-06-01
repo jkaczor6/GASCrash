@@ -3,7 +3,10 @@
 
 #include "Utils/GC_BlueprintLibrary.h"
 
+#include "AbilitySystemBlueprintLibrary.h"
+#include "AbilitySystem/GC_AttributeSet.h"
 #include "Characters/GC_BaseCharacter.h"
+#include "GameplayTags/GCTags.h"
 #include "Kismet/GameplayStatics.h"
 
 EHitDirection UGC_BlueprintLibrary::GetHitDirection(const FVector& TargetForward, const FVector& ToInstigator)
@@ -66,4 +69,29 @@ FClosestActorWithTagResult UGC_BlueprintLibrary::FindClosestActorWithTag(const U
 	Result.Distance = ClosestDistance;
 	
 	return Result;
+}
+
+void UGC_BlueprintLibrary::SendDamageEventToPlayer(AActor* Target, const TSubclassOf<UGameplayEffect>& DamageEffect,
+	const FGameplayEventData& PayLoad, const FGameplayTag& DataTag, float Damage)
+{
+	AGC_BaseCharacter* BaseCharacter{ Cast<AGC_BaseCharacter>(Target) };
+	if (!IsValid(BaseCharacter) || !BaseCharacter->IsAlive()) return;
+	
+	UGC_AttributeSet* AttributeSet{ Cast<UGC_AttributeSet>(BaseCharacter->GetAttributeSet()) };
+	if (!IsValid(AttributeSet)) return;
+	
+	const bool bLethal{ AttributeSet->GetHealth() - Damage <= 0.f };
+	const FGameplayTag EventTag{bLethal ? GCTags::Events::Player::Death : GCTags::Events::Player::HitReact};
+	
+	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(BaseCharacter, EventTag, PayLoad);
+	
+	UAbilitySystemComponent* TargetASC{ BaseCharacter->GetAbilitySystemComponent() };
+	if (!IsValid(TargetASC)) return;
+	
+	FGameplayEffectContextHandle ContextHandle{ TargetASC->MakeEffectContext() };
+	FGameplayEffectSpecHandle SpecHangle{ TargetASC->MakeOutgoingSpec(DamageEffect, 1.f, ContextHandle) };
+	
+	UAbilitySystemBlueprintLibrary::AssignTagSetByCallerMagnitude(SpecHangle, DataTag, -Damage);
+	
+	TargetASC->ApplyGameplayEffectSpecToSelf(*SpecHangle.Data.Get());
 }
