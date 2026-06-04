@@ -48,5 +48,5 @@ public:
 	static FClosestActorWithTagResult FindClosestActorWithTag(const UObject* WorldContextObject, const FVector& Origin, const FName& Tag);
 	
 	UFUNCTION(BlueprintCallable)
-	static void SendDamageEventToPlayer(AActor* Target, const TSubclassOf<UGameplayEffect>& DamageEffect, const FGameplayEventData& PayLoad, const FGameplayTag & DataTag, float Damage);
+	static void SendDamageEventToPlayer(AActor* Target, const TSubclassOf<UGameplayEffect>& DamageEffect, UPARAM(ref) FGameplayEventData& PayLoad, const FGameplayTag & DataTag, float Damage, UObject* OptionalParticleSystem = nullptr);
 };
