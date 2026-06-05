@@ -27,12 +27,12 @@ The goal is a thorough, hands-on understanding of GAS architecture in a real gam
 | **Attributes & Attribute Sets** | Attribute Sets, Widgets, Gameplay Effects, Curve Tables, Leveling Up Abilities |
 | **Character Death & Respawning** | Attribute Changes, Async Task, Applying Tags, Resetting Attributes, Handling Death and Respawn |
 | **Enemy Combat AI** | Enemy Attack Montages, Abilities, Searching for Target, Projectile |
+| **Player Damage & Hit Reacts** | Player Hit Reacts, Respawn, Particles, Gameplay Cues, Camera Shake |
 
 ---
 
 ## 🔜 In Progress
 
-- Player Damage & Hit Reacts
 - Ability Cost & Cooldown
 
 ---
