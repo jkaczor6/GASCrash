@@ -74,16 +74,24 @@ FClosestActorWithTagResult UGC_BlueprintLibrary::FindClosestActorWithTag(const U
 }
 
 void UGC_BlueprintLibrary::SendDamageEventToPlayer(AActor* Target, const TSubclassOf<UGameplayEffect>& DamageEffect,
-	FGameplayEventData& PayLoad, const FGameplayTag& DataTag, float Damage, UObject* OptionalParticleSystem)
+	FGameplayEventData& PayLoad, const FGameplayTag& DataTag, float Damage, const FGameplayTag& EventTagOverride, UObject* OptionalParticleSystem)
 {
 	AGC_BaseCharacter* BaseCharacter{ Cast<AGC_BaseCharacter>(Target) };
 	if (!IsValid(BaseCharacter) || !BaseCharacter->IsAlive()) return;
 	
-	UGC_AttributeSet* AttributeSet{ Cast<UGC_AttributeSet>(BaseCharacter->GetAttributeSet()) };
-	if (!IsValid(AttributeSet)) return;
+	FGameplayTag EventTag;
+	if (!EventTagOverride.MatchesTagExact(GCTags::None))
+	{
+		EventTag = EventTagOverride;
+	}
+	else
+	{
+		UGC_AttributeSet* AttributeSet{ Cast<UGC_AttributeSet>(BaseCharacter->GetAttributeSet()) };
+		if (!IsValid(AttributeSet)) return;
 	
-	const bool bLethal{ AttributeSet->GetHealth() - Damage <= 0.f };
-	const FGameplayTag EventTag{bLethal ? GCTags::Events::Player::Death : GCTags::Events::Player::HitReact};
+		const bool bLethal{ AttributeSet->GetHealth() - Damage <= 0.f };
+		EventTag = bLethal ? GCTags::Events::Player::Death : GCTags::Events::Player::HitReact;
+	}
 	
 	PayLoad.OptionalObject = OptionalParticleSystem;
 	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(BaseCharacter, EventTag, PayLoad);
@@ -97,6 +105,16 @@ void UGC_BlueprintLibrary::SendDamageEventToPlayer(AActor* Target, const TSubcla
 	UAbilitySystemBlueprintLibrary::AssignTagSetByCallerMagnitude(SpecHangle, DataTag, -Damage);
 	
 	TargetASC->ApplyGameplayEffectSpecToSelf(*SpecHangle.Data.Get());
+}
+
+void UGC_BlueprintLibrary::SendDamageEventToPlayers(TArray<AActor*> Targets,
+	const TSubclassOf<UGameplayEffect>& DamageEffect, FGameplayEventData& PayLoad, const FGameplayTag& DataTag,
+	float Damage, const FGameplayTag& EventTagOverride, UObject* OptionalParticleSystem)
+{
+	for (AActor* Target : Targets)
+	{
+		SendDamageEventToPlayer(Target, DamageEffect, PayLoad, DataTag, Damage, EventTagOverride, OptionalParticleSystem);
+	}
 }
 
 TArray<AActor*> UGC_BlueprintLibrary::HitBoxOverlapTest(AActor* AvatarActor, float HitBoxRadius, float HitBoxForwardOffset, float HitBoxElevationOffset, bool bDrawDebugs)

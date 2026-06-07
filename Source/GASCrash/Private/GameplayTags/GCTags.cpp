@@ -2,6 +2,7 @@
 
 namespace GCTags
 {
+	UE_DEFINE_GAMEPLAY_TAG(None, "GCTags.None")
 	namespace SetByCaller
 	{
 		UE_DEFINE_GAMEPLAY_TAG(Projectile, "GCTags.SetByCaller.Projectile")
