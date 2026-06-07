@@ -40,6 +40,9 @@ public:
 	
 	UFUNCTION(BlueprintCallable, Category = "GAS|Attributes")
 	void ResetAttributes();
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "GAS|AI")
+	float SearchRange{ 1000.f };
 protected:
 	void GiveStartupAbilities();
 	void InitializeAttributes() const;
