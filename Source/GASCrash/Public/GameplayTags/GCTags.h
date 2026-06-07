@@ -33,6 +33,7 @@ namespace GCTags
 		{
 			UE_DECLARE_GAMEPLAY_TAG_EXTERN(HitReact);
 			UE_DECLARE_GAMEPLAY_TAG_EXTERN(MeleeTraceHit);
+			UE_DECLARE_GAMEPLAY_TAG_EXTERN(EndAttack);
 		}
 	}
 }

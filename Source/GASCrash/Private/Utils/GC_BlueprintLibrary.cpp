@@ -6,6 +6,7 @@
 #include "AbilitySystemBlueprintLibrary.h"
 #include "AbilitySystem/GC_AttributeSet.h"
 #include "Characters/GC_BaseCharacter.h"
+#include "Characters/GC_EnemyCharacter.h"
 #include "Engine/OverlapResult.h"
 #include "GameplayTags/GCTags.h"
 #include "Kismet/GameplayStatics.h"
@@ -186,6 +187,11 @@ TArray<AActor*> UGC_BlueprintLibrary::ApplyKnockback(AActor* AvatarActor, const 
 		
 		const FVector Right{ KnockbackForce.RotateAngleAxis(90.f, FVector::UpVector) };
 		KnockbackForce = KnockbackForce.RotateAngleAxis(-RotationAngle, Right) * LaunchForce;
+		
+		if (AGC_EnemyCharacter* EnemyCharacter{Cast<AGC_EnemyCharacter>(HitCharacter)}; IsValid(EnemyCharacter))
+		{
+			EnemyCharacter->StopMovementUntilLanded();
+		}
 		
 		HitCharacter->LaunchCharacter(KnockbackForce, true, true);
 	}

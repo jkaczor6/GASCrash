@@ -16,6 +16,7 @@ class GASCRASH_API AGC_EnemyCharacter : public AGC_BaseCharacter
 
 public:
 	AGC_EnemyCharacter();
+	virtual void GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const override;
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	virtual UAttributeSet* GetAttributeSet() const override;
 	
@@ -27,11 +28,19 @@ public:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "GAS|AI")
 	float MaxAttackDelay{ .5f };
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Replicated, Category = "GAS|AI")
+	bool bIsBeingLaunched{ false };
+	
+	void StopMovementUntilLanded();
 protected:
 	virtual void BeginPlay() override;
 
 	virtual void HandleDeath() override;
 private:
+	
+	UFUNCTION()
+	void EnableMovementOnLanded(const FHitResult& Hit);
 	
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
