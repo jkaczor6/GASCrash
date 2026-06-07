@@ -77,11 +77,12 @@ void UGC_WidgetComponent::BindWidgetToAttributeChanges(UWidget* WidgetObject,
 	UGC_AttributeWidget* AttributeWidget{ Cast<UGC_AttributeWidget>(WidgetObject) };
 	if (!IsValid(AttributeWidget)) return; // only GC Attribute Widgets
 	if (!AttributeWidget->MatchesAttributes(Pair)) return; // only matching attributes
+	AttributeWidget->AvatarActor = GASCharacter;
 		
-	AttributeWidget->OnAttributeChange(Pair, AttributeSet.Get()); // for initial values
+	AttributeWidget->OnAttributeChange(Pair, AttributeSet.Get(), 0.f); // for initial values
 		
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(Pair.Key).AddLambda([AttributeWidget, &Pair, this](const FOnAttributeChangeData& AttributeChangeData)
 	{
-		AttributeWidget->OnAttributeChange(Pair, AttributeSet.Get()); // for changes during the game
+		AttributeWidget->OnAttributeChange(Pair, AttributeSet.Get(), AttributeChangeData.OldValue); // for changes during the game
 	});
 }
