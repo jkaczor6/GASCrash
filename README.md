@@ -2,8 +2,6 @@
 
 A combat game built in Unreal Engine 5 as a deep dive into the **Gameplay Ability System (GAS)**. The project covers all core GAS components from scratch — abilities, attributes, AI, Gameplay Effects, Gameplay Cues and more.
 
-> 🚧 Work in progress — actively developed alongside a structured GAS course.
-
 ---
 
 ## 🎮 About
@@ -28,12 +26,7 @@ The goal is a thorough, hands-on understanding of GAS architecture in a real gam
 | **Character Death & Respawning** | Attribute Changes, Async Task, Applying Tags, Resetting Attributes, Handling Death and Respawn |
 | **Enemy Combat AI** | Enemy Attack Montages, Abilities, Searching for Target, Projectile |
 | **Player Damage & Hit Reacts** | Player Hit Reacts, Respawn, Particles, Gameplay Cues, Camera Shake |
-
----
-
-## 🔜 In Progress
-
-- Ability Cost & Cooldown
+| **Ability Cost & Cooldown** | Secondary Ability, Knockback, Ability Cost and Cooldown, Attribute Pickups, Damage Numbers |
 
 ---
 
